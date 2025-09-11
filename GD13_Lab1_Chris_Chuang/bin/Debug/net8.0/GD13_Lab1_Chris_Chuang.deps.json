@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "GD13_Lab1_Chris_Chuang/1.0.0": {
+        "runtime": {
+          "GD13_Lab1_Chris_Chuang.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GD13_Lab1_Chris_Chuang/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
