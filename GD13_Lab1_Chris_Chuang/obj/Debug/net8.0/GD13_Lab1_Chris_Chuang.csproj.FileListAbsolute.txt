@@ -1,0 +1,14 @@
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\bin\Debug\net8.0\GD13_Lab1_Chris_Chuang.exe
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\bin\Debug\net8.0\GD13_Lab1_Chris_Chuang.deps.json
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\bin\Debug\net8.0\GD13_Lab1_Chris_Chuang.runtimeconfig.json
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\bin\Debug\net8.0\GD13_Lab1_Chris_Chuang.dll
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\bin\Debug\net8.0\GD13_Lab1_Chris_Chuang.pdb
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\obj\Debug\net8.0\GD13_Lab1_Chris_Chuang.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\obj\Debug\net8.0\GD13_Lab1_Chris_Chuang.AssemblyInfoInputs.cache
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\obj\Debug\net8.0\GD13_Lab1_Chris_Chuang.AssemblyInfo.cs
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\obj\Debug\net8.0\GD13_Lab1_Chris_Chuang.csproj.CoreCompileInputs.cache
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\obj\Debug\net8.0\GD13_Lab1_Chris_Chuang.dll
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\obj\Debug\net8.0\refint\GD13_Lab1_Chris_Chuang.dll
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\obj\Debug\net8.0\GD13_Lab1_Chris_Chuang.pdb
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\obj\Debug\net8.0\GD13_Lab1_Chris_Chuang.genruntimeconfig.cache
+C:\Users\chris\source\repos\GD13_Lab1_Chris_Chuang\obj\Debug\net8.0\ref\GD13_Lab1_Chris_Chuang.dll
