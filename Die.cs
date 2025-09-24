@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Lab_4
 {
-    class Program
+    public class Die
     {
-        static void Main(string[] args)
+        private Random random = new Random();
+
+        public int Roll(int sides)
         {
-            GameManager game = new GameManager();
-            game.Play();
+            return random.Next(1, sides + 1);
         }
     }
 }
-
-
