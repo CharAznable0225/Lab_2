@@ -9,10 +9,16 @@ namespace Lab_4
     public class Die
     {
         private Random random = new Random();
+        public int Sides { get; private set; }
 
-        public int Roll(int sides)
+        public Die(int sides)
         {
-            return random.Next(1, sides + 1);
+            Sides = sides;
+        }
+
+        public int Roll()
+        {
+            return random.Next(1, Sides + 1);
         }
     }
 }

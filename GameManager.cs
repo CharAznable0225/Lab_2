@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,97 +11,122 @@ namespace Lab_4
 {
     public class GameManager
     {
-        private Player player;
+        private Player human;
         private Player computer;
-        private Die die;
+        private List<Die> startingDice;
 
-        public GameManager()
+        public void Run()
         {
-            die = new Die();
+            PrintTitle();
+            SetupGame();
+
+            bool playAgain = true;
+            while (playAgain)
+            {
+                StartGame();
+                playAgain = AskPlayAgain();
+            }
+
+            PrintGoodbye();
         }
 
-        public void Play()
+        private void PrintTitle()
         {
-            Console.WriteLine("=== Welcome to Lab 4 Dice Game ===");
-            Console.WriteLine($"Author: Chris   Date: {DateTime.Now.ToShortDateString()}");
-            Console.WriteLine("----------------------------------");
+            Console.WriteLine("*********************************");
+            Console.WriteLine(" Welcome to the Dice Battle Game ");
+            Console.WriteLine("*********************************");
+        }
 
-            
+        private void SetupGame()
+        {
             Console.Write("Enter your name: ");
-            string playerName = Console.ReadLine();
-            player = new Player(playerName);
-            computer = new Player("Computer");
+            string name = Console.ReadLine() ?? "Player";
 
-            
-            Random rnd = new Random();
-            bool playerFirst = rnd.Next(0, 2) == 0;
-            Console.WriteLine(playerFirst ? $"{player.Name} goes first!" : $"{computer.Name} goes first!");
+            Console.WriteLine($"{name}, welcome to the Dice Battle!");
+            Console.WriteLine("Game rules: Both you and the computer will roll dice. Higher roll wins the round!");
+            Console.WriteLine("Each die can only be used once.");
             Console.WriteLine();
 
-            
-            if (playerFirst)
+            startingDice = new List<Die>
             {
-                PlayerRoll(player);
-                PlayerRoll(computer);
-            }
-            else
-            {
-                PlayerRoll(computer);
-                PlayerRoll(player);
-            }
+                new Die(6),
+                new Die(8),
+                new Die(12),
+                new Die(20)
+            };
 
-            
-            Console.WriteLine();
-            if (player.CurrentRoll > computer.CurrentRoll)
-            {
-                Console.WriteLine($"{player.Name} wins this round!");
-                player.Score++;
-            }
-            else if (computer.CurrentRoll > player.CurrentRoll)
-            {
-                Console.WriteLine($"{computer.Name} wins this round!");
-                computer.Score++;
-            }
-            else
-            {
-                Console.WriteLine("It's a tie!");
-            }
-
-            
-            Console.WriteLine("----------------------------------");
-            Console.WriteLine("Round Summary:");
-            Console.WriteLine($"{player.Name} Score: {player.Score}");
-            Console.WriteLine($"{computer.Name} Score: {computer.Score}");
-            Console.WriteLine("Game Over. Thanks for playing!");
-            Console.ReadLine();
+            human = new Player(name, false, startingDice);
+            computer = new Player("Computer", true, startingDice);
         }
 
-        private void PlayerRoll(Player p)
+        private void StartGame()
         {
-            int sides;
+            Console.WriteLine("Are you ready? (yes/no)");
+            string? input = Console.ReadLine()?.ToLower();
+            if (input != "yes") return;
 
-            if (p.Name == "Computer")
+            int rounds = startingDice.Count;
+
+            for (int round = 1; round <= rounds; round++)
             {
-                
-                int[] options = { 6, 8, 12, 20 };
-                Random rnd = new Random();
-                sides = options[rnd.Next(options.Length)];
-                Console.WriteLine($"Computer chooses a d{sides}");
-            }
-            else
-            {
-                
-                Console.Write("Choose a die to roll (6, 8, 12, 20): ");
-                while (!int.TryParse(Console.ReadLine(), out sides) || (sides != 6 && sides != 8 && sides != 12 && sides != 20))
+                Console.WriteLine($"\n--- Round {round} ---");
+
+                int humanRoll = human.TakeTurn();
+                int computerRoll = computer.TakeTurn();
+
+                if (humanRoll > computerRoll)
                 {
-                    Console.Write("Invalid choice. Please choose 6, 8, 12, or 20: ");
+                    Console.WriteLine($"{human.Name} wins the round!");
+                    human.Score++;
+                }
+                else if (computerRoll > humanRoll)
+                {
+                    Console.WriteLine($"{computer.Name} wins the round!");
+                    computer.Score++;
+                }
+                else
+                {
+                    Console.WriteLine("It's a tie! No points awarded.");
                 }
             }
 
-            
-            int roll = die.Roll(sides);
-            p.CurrentRoll = roll;
-            Console.WriteLine($"{p.Name} rolled a {roll} on a d{sides}");
+            PrintSummary();
+        }
+
+        private void PrintSummary()
+        {
+            Console.WriteLine("\n=== Game Summary ===");
+
+            Console.WriteLine($"{human.Name}: {human.Score} points, total rolls = {Sum(human.Rolls)}, rolls: {string.Join(", ", human.Rolls)}");
+            Console.WriteLine($"{computer.Name}: {computer.Score} points, total rolls = {Sum(computer.Rolls)}, rolls: {string.Join(", ", computer.Rolls)}");
+
+            if (human.Score > computer.Score)
+                Console.WriteLine($"{human.Name} wins the game!");
+            else if (computer.Score > human.Score)
+                Console.WriteLine($"{computer.Name} wins the game!");
+            else
+                Console.WriteLine("It's a draw!");
+        }
+
+        private int Sum(List<int> rolls)
+        {
+            int total = 0;
+            foreach (int r in rolls) total += r;
+            return total;
+        }
+
+        private bool AskPlayAgain()
+        {
+            Console.WriteLine("\nWould you like to play again? (yes/no)");
+            string? input = Console.ReadLine()?.ToLower();
+            return input == "yes";
+        }
+
+        private void PrintGoodbye()
+        {
+            Console.WriteLine("\n*********************************");
+            Console.WriteLine(" Thanks for playing Dice Battle! ");
+            Console.WriteLine("*********************************");
         }
     }
 }
